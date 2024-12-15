@@ -1,0 +1,3 @@
+- more assertion macros
+- allow passing in your own output stream in test suites
+- colored (aka gay) output support

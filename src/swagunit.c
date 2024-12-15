@@ -1,24 +1,7 @@
-#ifndef SWAGUNIT_H
-#define SWAGUNIT_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "swagunit_h"
 
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
-
-enum swagunit_test_result {
-	SWAGUNIT_TEST_FAILED,
-	SWAGUNIT_TEST_PASSED,
-};
-
-struct swagunit_test_suite {
-	const char *name;
-	enum swagunit_test_result last_test_result;
-	uint32_t tests_failed, tests_passed;
-};
 
 struct swagunit_test_suite swagunit_make_test_suite(const char *const name)
 {
@@ -51,7 +34,7 @@ int swagunit_finalize_test_suite(struct swagunit_test_suite suite)
 	uint32_t tests_ran = suite.tests_failed + suite.tests_passed;
 
 	fprintf(stderr,
-			"ran %u tests from the \"%s\" test suite (%u failed, %u passed)",
+			"ran %u tests from the \"%s\" test suite (%u failed, %u passed)\n",
 			tests_ran, suite.name, suite.tests_failed, suite.tests_passed);
 
 	if (suite.tests_failed > 0)
@@ -59,17 +42,3 @@ int swagunit_finalize_test_suite(struct swagunit_test_suite suite)
 
 	return 0;
 }
-
-#define SWAGUNIT_ASSERT(suite, cond) \
-	if (!cond) {\
-		suite->last_test_result = SWAGUNIT_TEST_FAILED;\
-		fprintf(stderr,\
-				"file %s, %s at line %d: expected \"%s\" to be true, got false\n",\
-				__FILE__, __func__, __LINE__, #cond);\
-	}
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // SWAGUNIT_H
