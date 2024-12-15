@@ -3,13 +3,15 @@
 #include <stdio.h>
 #include <string.h>
 
-struct swagunit_test_suite swagunit_make_test_suite(const char *const name)
+struct swagunit_test_suite swagunit_make_test_suite(const char *const name,
+													FILE *output_stream)
 {
 	struct swagunit_test_suite suite;
 	suite.name = strdup(name);
 	suite.last_test_result = SWAGUNIT_TEST_PASSED;
 	suite.tests_failed = 0;
 	suite.tests_passed = 0;
+	suite.output_stream = output_stream;
 	return suite;
 }
 

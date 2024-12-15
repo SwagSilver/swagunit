@@ -24,9 +24,10 @@ struct swagunit_test_suite {
 };
 
 /**
- * Returns a test suite with the given name
+ * Returns a test suite with the given name and output stream
  */
-struct swagunit_test_suite swagunit_make_test_suite(const char *const name);
+struct swagunit_test_suite swagunit_make_test_suite(const char *const name,
+													FILE *output_stream);
 
 /**
  * Runs the given test using the given test suite
