@@ -1,17 +1,27 @@
-#include "swagunit_h"
+#include "swagunit.h"
 
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
 
+struct swagunit_output_config swagunit_get_default_output_config(void)
+{
+	struct swagunit_output_config config;
+	config.stream = stderr;
+	config.colored = true;
+	return config;
+}
+
 struct swagunit_test_suite swagunit_make_test_suite(const char *const name,
-													FILE *output_stream)
+													struct swagunit_output_config output_config)
 {
 	struct swagunit_test_suite suite;
 	suite.name = strdup(name);
 	suite.last_test_result = SWAGUNIT_TEST_PASSED;
 	suite.tests_failed = 0;
 	suite.tests_passed = 0;
-	suite.output_stream = output_stream;
+	suite.output_config = output_config;
 	return suite;
 }
 
