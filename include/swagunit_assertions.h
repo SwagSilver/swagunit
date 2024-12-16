@@ -5,13 +5,24 @@
 extern "C" {
 #endif
 
+#include "swagunit_escape.h"
+
 #include <stdio.h>
+
+#define __BOLD(s) BOLD #s BOLD_CLEAR
 
 #define SWAGUNIT_FAIL_TEST(suite, msg, ...) \
 	suite->last_test_result = SWAGUNIT_TEST_FAILED;\
-	fprintf(suite->output_stream,\
-			"file %s, %s at line %d: assertion failed - " msg "\n",\
-			__FILE__, __func__, __LINE__, __VA_ARGS__);
+	if (suite->output_config->colored) {\
+		fprintf(suite->output_config->stream,\
+				"file %s, %s at line %d: " RED "assertion failed" CLEAR " - " msg "\n",\
+				__BOLD(__FILE__), __BOLD(__func__), __BOLD(__LINE__),\
+				__VA_ARGS__);\
+	} else {\
+		fprintf(suite->output_config->stream,\
+				"file %s, %s at line %d: assertion failed - " msg "\n",\
+				__FILE__, __func__, __LINE__, __VA_ARGS__);\
+	}
 
 #define SWAGUNIT_ASSERT_TRUE(suite, cond) \
 	if (!cond)\
