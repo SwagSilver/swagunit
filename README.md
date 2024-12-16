@@ -1,2 +1,2 @@
 # swagunit
-lean and mean unit testing for my C projects, don't try it out in yours yet
+i <3 reinventing the wheel
