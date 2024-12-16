@@ -15,7 +15,7 @@ extern "C" {
 	suite->last_test_result = SWAGUNIT_TEST_FAILED;\
 	if (suite->output_config->colored) {\
 		fprintf(suite->output_config->stream,\
-				"file %s, %s at line %d: " RED "assertion failed" CLEAR " - " msg "\n",\
+				"file %s, %s at line %s: " RED "assertion failed" CLEAR " - " msg "\n",\
 				__BOLD(__FILE__), __BOLD(__func__), __BOLD(__LINE__),\
 				__VA_ARGS__);\
 	} else {\
