@@ -30,7 +30,6 @@ extern "C" {
 					"file %s, %s at line %d: assertion failed - " msg "\n",\
 					__FILE__, __func__, __LINE__, __VA_ARGS__);\
 		}\
-	}
 
 #define SWAGUNIT_ASSERT_TRUE(suite, cond) \
 	if (!cond)\
