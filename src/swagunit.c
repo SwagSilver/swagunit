@@ -38,16 +38,21 @@ void swagunit_run_test(struct swagunit_test_suite *const suite,
 	case SWAGUNIT_TEST_PASSED:
 		suite->tests_passed++;
 		break;
+	case SWAGUNIT_TEST_SKIPPED:
+		suite->tests_skipped++;
+		break;
 	}
 }
 
 int swagunit_finalize_test_suite(struct swagunit_test_suite suite)
 {
-	uint32_t tests_ran = suite.tests_failed + suite.tests_passed;
+	uint32_t tests_ran =
+		suite.tests_failed + suite.tests_passed + suite.tests_skipped;
 
 	fprintf(stderr,
-			"ran %u tests from the \"%s\" test suite (%u failed, %u passed)\n",
-			tests_ran, suite.name, suite.tests_failed, suite.tests_passed);
+			"ran %u tests from the \"%s\" test suite (%u failed, %u passed, %u skipped)\n",
+			tests_ran, suite.name, suite.tests_failed, suite.tests_passed,
+			suite.tests_skipped);
 
 	if (suite.tests_failed > 0)
 		return -1;
