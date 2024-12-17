@@ -1,4 +1,4 @@
-#include "swagunit.h"
+#include "swagunit_test_suite.h"
 
 #include <stdbool.h>
 #include <stdio.h>
